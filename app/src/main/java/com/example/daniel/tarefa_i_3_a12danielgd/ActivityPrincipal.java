@@ -15,9 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivityPrincipal extends AppCompatActivity {
-    private static final int COD_ACTIVITY_SECUNDARIA = 30;
-    private String gardarCadena;
-    private String gardarTelf;
+    private static final int COD_ACTIVITY_SECUNDARIA = 1;
+    private String gardarCadena = "";
+    private String gardarTelf = "";
     private AlertDialog.Builder dialog;
 
     @Override
@@ -52,8 +52,8 @@ public class ActivityPrincipal extends AppCompatActivity {
         dialog.setPositiveButton("Marcar Telefono", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (gardarTelf != "" & gardarTelf != null) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + gardarTelf));
+                if (!gardarTelf.equals("")) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL,Uri.parse("tel:"+gardarTelf));
                     startActivity(intent);
                 } else {
                     Toast.makeText(ActivityPrincipal.this, "Non hai ningun numero para mostrar", Toast.LENGTH_SHORT).show();
@@ -64,7 +64,7 @@ public class ActivityPrincipal extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-                if (gardarCadena != "" & gardarCadena != null) {
+                if (!gardarCadena.equals("")) {
                     intent.putExtra(SearchManager.QUERY, gardarCadena);
                 } else {
                     intent.putExtra(SearchManager.QUERY, "Casa");
