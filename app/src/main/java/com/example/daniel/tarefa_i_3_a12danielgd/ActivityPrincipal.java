@@ -49,12 +49,19 @@ public class ActivityPrincipal extends AppCompatActivity {
         dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Atención");
         dialog.setMessage("Que queres facer?");
+        dialog.setIcon(android.R.drawable.ic_dialog_info);
         dialog.setPositiveButton("Marcar Telefono", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (!gardarTelf.equals("")) {
-                    Intent intent = new Intent(Intent.ACTION_DIAL,Uri.parse("tel:"+gardarTelf));
-                    startActivity(intent);
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+                    intent.setData(Uri.parse("tel:" + gardarTelf));
+                    try {
+                        startActivity(intent);
+                    }catch(SecurityException e) {
+                        e.printStackTrace();
+                    }
+
                 } else {
                     Toast.makeText(ActivityPrincipal.this, "Non hai ningun numero para mostrar", Toast.LENGTH_SHORT).show();
                 }
@@ -99,9 +106,9 @@ public class ActivityPrincipal extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle estado) {
-        super.onSaveInstanceState(estado);
         estado.putString("TEXTO", gardarCadena);
         estado.putString("TELF", gardarTelf);
+        super.onSaveInstanceState(estado);
         this.removeDialog(1);
 
     }

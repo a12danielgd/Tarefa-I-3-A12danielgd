@@ -37,7 +37,7 @@
             android:id="@+id/telefono"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="phone"
             android:saveEnabled="true"/>
     </LinearLayout>
     <Button
